@@ -2,9 +2,9 @@ from ennemi import Ennemi
 
 class Jeu:
     def __init__(self):
-        self.heros_hp = 100
-        self.heros_hp_max = 100
-        self.heros_attaque = 20
+        self.heros_hp = 150
+        self.heros_hp_max = 150
+        self.heros_attaque = 25
 
         self.ennemis = [
             Ennemi("Goblin", 50, 10, "agressif"),
