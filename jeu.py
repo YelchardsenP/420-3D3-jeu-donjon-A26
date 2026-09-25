@@ -3,12 +3,13 @@ from models.comportements.co_agressif import ComportementAgressif
 from models.comportements.co_defensif import ComportementDefensif
 from models.comportements.co_aleatoire import ComportementAleatoire
 from models.comportements.co_furtif import ComportementFurtif
+from models.comportements.co_berserker import ComportementBerserker
 
 
 class Jeu:
     def __init__(self):
-        self.heros_hp = 150
-        self.heros_hp_max = 150
+        self.heros_hp = 1000
+        self.heros_hp_max = 1000
         self.heros_attaque = 25
 
         self.ennemis = [
@@ -16,6 +17,7 @@ class Jeu:
             Ennemi("Dragon",  hp=100, attaque=12, comportement=ComportementDefensif()),
             Ennemi("Spectre", hp=40,  attaque=10, comportement=ComportementAleatoire()),
             Ennemi("Voleur",  hp=30,  attaque=10, comportement=ComportementFurtif()),
+            Ennemi("Son Goku", hp=200, attaque=10, comportement=ComportementBerserker())
         ]
 
     def ennemis_vivants(self):
@@ -88,9 +90,17 @@ class Jeu:
                         degats = ennemi.attaque
                         print(f"  → {ennemi.nom} vous attaque pour {degats} dégâts !")
                     self.heros_hp = max(0, self.heros_hp - degats)
+                elif action_ennemi == "attaque_double":          # ← nouveau cas pour Berserker
+                    degats = ennemi.attaque * 2
+                    if action_heros == "defend":
+                        degats = degats // 2
+                        print(f"  → {ennemi.nom} attaque en BERSERK — vous vous défendez ! Seulement {degats} dégâts reçus.")
+                    else:
+                        print(f"  → {ennemi.nom} attaque en BERSERK pour {degats} dégâts !")
+                    self.heros_hp = max(0, self.heros_hp - degats)
                 else:
                     print(f"  → {ennemi.nom} se défend.")
-
+            
             # Adaptation des comportements
             for ennemi in self.ennemis_vivants():
                 if ennemi.hp < ennemi.hp_max * 0.3 and type(ennemi.get_comportement()) == ComportementDefensif:
