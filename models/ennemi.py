@@ -1,4 +1,4 @@
-from models.comportement import Comportement
+from models.comportements.comportement import Comportement
 
 
 class Ennemi:
@@ -9,7 +9,7 @@ class Ennemi:
         self.hp = hp
         self.hp_max = hp
         self.attaque = attaque
-        self._comportement = comportement   # ← composition
+        self._comportement = comportement   # ← composition d'objet de clase Comportement
 
     def agir(self) -> str:
         return self._comportement.agir(self)   # ← délégation

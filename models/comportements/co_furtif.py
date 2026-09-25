@@ -1,4 +1,4 @@
-from models.comportement import Comportement
+from models.comportements.comportement import Comportement
 
 
 class ComportementFurtif(Comportement):
@@ -11,3 +11,6 @@ class ComportementFurtif(Comportement):
         if self._tour % 2 == 0:
             return "attaque"
         return "defend"
+
+    def __str__(self) -> str:
+        return "furtif"

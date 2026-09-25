@@ -15,3 +15,7 @@ class Comportement(ABC):
             "attaque" ou "defend"
         """
         pass
+
+    @abstractmethod
+    def __str__(self) -> str:
+        pass
